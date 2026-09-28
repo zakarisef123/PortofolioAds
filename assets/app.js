@@ -14,12 +14,10 @@
   var FR = {
     'Zakari Sefta — Ads Portfolio': 'Zakari Sefta — Portfolio Ads & Web',
     'Websites': 'Sites web',
-    'Offers': 'Offres',
     'Switch language': 'Changer de langue',
     'Toggle dark mode': 'Mode sombre',
     'Ads & Web Portfolio': 'Portfolio Ads & Web',
     'Freelance digital acquisition: Google Ads, Local Services Ads & Google My Business campaigns, plus the conversion-focused websites they point to. From bidding strategy and tracking to design, local SEO and continuous CPA and ROAS optimization.': 'Acquisition digitale en freelance : campagnes Google Ads, Local Services Ads et Google My Business, et les sites web qui convertissent derrière. De la stratégie d’enchères et du tracking jusqu’au design, au SEO local et à l’optimisation continue du CPA et du ROAS.',
-    'Discuss your project': 'Parlons de votre projet',
     'Ad budget managed / quarter': 'Budget pub géré / trimestre',
     'Reported conversions (cumulative)': 'Conversions remontées (cumul)',
     'Cost / conversion (by account)': 'Coût / conversion (selon compte)',
@@ -34,7 +32,6 @@
     'GTM / GA4 call and form tracking wired into every site, plus city-by-city landing pages built to rank locally and feed the ad campaigns.': 'Suivi des appels et formulaires via GTM / GA4 sur chaque site, et pages locales ville par ville pensées pour se positionner et alimenter les campagnes.',
     'Part 1': 'Partie 1',
     'Part 2': 'Partie 2',
-    'Part 3': 'Partie 3',
     'Accounts I manage end to end. Figures are taken directly from the Google Ads and LSA dashboards shown below each case.': 'Des comptes que je gère de A à Z. Les chiffres viennent directement des tableaux de bord Google Ads et LSA affichés sous chaque cas.',
     'March 23 – August 31, 2026': '23 mars – 31 août 2026',
     'Freelance — Google Ads & Local Services Ads': 'Freelance — Google Ads & Local Services Ads',
@@ -158,32 +155,18 @@
     'Geneva, Lausanne and the canton of Vaud.': 'Genève, Lausanne et le canton de Vaud.',
     'Call-first UX': 'Parcours orienté appel',
     'Swiss market': 'Marché suisse',
-    'Three ways to work together. Every project starts with a free call to look at your market, your competitors and your budget.': 'Trois façons de travailler ensemble. Chaque projet commence par un appel gratuit pour étudier votre marché, vos concurrents et votre budget.',
-    'Website': 'Site web',
-    'A custom website built to turn visitors into customers.': 'Un site sur mesure, construit pour transformer les visiteurs en clients.',
-    'Custom design, mobile-first': 'Design sur mesure, mobile d’abord',
-    'Click-to-call, quote or booking forms': 'Appel en un clic, formulaires de devis ou de réservation',
-    'Local SEO basics & Google Business Profile': 'Bases du SEO local & fiche Google Business',
-    'GTM / GA4 tracking installed': 'Tracking GTM / GA4 installé',
-    'FR / EN version on request': 'Version FR / EN sur demande',
-    'Custom quote': 'Sur devis',
-    'Most complete': 'Le plus complet',
-    'Website + Ads': 'Site + Ads',
-    'The full package: the site and the campaigns that bring it traffic, managed together.': 'La formule complète : le site et les campagnes qui lui amènent du trafic, gérés ensemble.',
-    'Everything in Website': 'Tout le contenu de l’offre Site web',
-    'Google Ads & Local Services Ads setup': 'Mise en place Google Ads & Local Services Ads',
-    'Call and form conversion tracking': 'Suivi des conversions appels et formulaires',
-    'Monthly optimization & reporting': 'Optimisation & reporting mensuels',
-    'One contact for the whole funnel': 'Un seul interlocuteur pour tout le parcours',
-    'Campaign management for businesses that already have a site.': 'Gestion de campagnes pour les entreprises qui ont déjà un site.',
-    'Account audit & restructuring': 'Audit & restructuration du compte',
-    'Search, Performance Max & LSA': 'Search, Performance Max & LSA',
-    'Bidding strategy on CPA / ROAS': 'Stratégie d’enchères au CPA / ROAS',
-    'Weekly optimization': 'Optimisation hebdomadaire',
-    'Clear monthly reporting': 'Reporting mensuel clair',
-    "Let's talk about your project": 'Parlons de votre projet',
-    'Tell me about your business and your goals. I usually reply within the day.': 'Présentez-moi votre activité et vos objectifs. Je réponds en général dans la journée.',
     'Call': 'Appeler',
+    'Contact me': 'Me contacter',
+    "Let's work together": 'Travaillons ensemble',
+    'Open to new opportunities in paid acquisition and web. I usually reply within the day.': 'Ouvert à de nouvelles opportunités en acquisition payante et web. Je réponds en général dans la journée.',
+    'Tools I use daily': 'Mes outils au quotidien',
+    'Cost per conversion by account': 'Coût par conversion selon le compte',
+    'Lower is better. LSA figures are cost per billed lead; HOMEOMED is in CHF. Click a bar to open the case.': 'Plus c’est bas, mieux c’est. Pour les LSA, il s’agit du coût par lead facturé ; HOMEOMED est en CHF. Cliquez sur une barre pour voir le cas.',
+    'Oct 1, 2025 – Sept 28, 2026': '1er octobre 2025 – 28 septembre 2026',
+    'Management of a Search campaign for a Swiss account billed in CHF, on a 23 CHF/day budget. Conversion-focused setup with a 5.38% conversion rate and a cost per conversion kept around 21 CHF.': 'Gestion d’une campagne Search pour un compte suisse facturé en CHF, avec un budget de 23 CHF/jour. Configuration orientée conversions, avec un taux de conversion de 5,38 % et un coût par conversion maintenu autour de 21 CHF.',
+    'LSA · per lead': 'LSA · par lead',
+    'All channels': 'Tous canaux',
+    'billed leads': 'leads facturés',
     'Close': 'Fermer',
     'September 2026': 'Septembre 2026'
   };
@@ -292,6 +275,20 @@
     counters.forEach(function (el) { co.observe(el); });
   }
 
+  /* ---------- Hover scroll on site screenshots ---------- */
+  function measure(img) {
+    var screen = img.parentNode;
+    var shift = screen.clientHeight - img.clientHeight;
+    if (shift >= 0) { img.style.removeProperty('--shift'); return; }
+    img.style.setProperty('--shift', shift + 'px');
+    img.style.setProperty('--dur', Math.max(2, -shift / 220).toFixed(1) + 's');
+  }
+  var screens = document.querySelectorAll('.screen img');
+  screens.forEach(function (img) {
+    if (img.complete) measure(img); else img.addEventListener('load', function () { measure(img); });
+  });
+  window.addEventListener('resize', function () { screens.forEach(measure); });
+
   /* ---------- Website filters ---------- */
   var filters = document.querySelectorAll('.filter');
   filters.forEach(function (btn) {
@@ -300,7 +297,10 @@
       filters.forEach(function (b) { b.classList.toggle('is-active', b === btn); });
       document.querySelectorAll('.site-group').forEach(function (g) {
         g.hidden = cat !== 'all' && g.getAttribute('data-cat') !== cat;
-        if (!g.hidden) g.querySelectorAll('.reveal').forEach(function (r) { r.classList.add('in'); });
+        if (!g.hidden) {
+          g.querySelectorAll('.reveal').forEach(function (r) { r.classList.add('in'); });
+          g.querySelectorAll('.screen img').forEach(measure);
+        }
       });
     });
   });
@@ -316,8 +316,9 @@
       if (lastFocus) lastFocus.focus();
     }
     document.addEventListener('click', function (e) {
-      var img = e.target.closest('.shots img, .browser img');
-      if (!img) return;
+      var hit = e.target.closest('.shots img, .screen');
+      if (!hit) return;
+      var img = hit.tagName === 'IMG' ? hit : hit.querySelector('img');
       lastFocus = document.activeElement;
       boxImg.src = img.currentSrc || img.src;
       boxImg.alt = img.alt;
