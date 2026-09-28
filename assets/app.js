@@ -172,7 +172,7 @@
     'Cost per conversion by account': 'Coût par conversion selon le compte',
     'Lower is better. LSA figures are cost per billed lead; HOMEOMED is in CHF. Click a bar to open the case.': 'Plus c’est bas, mieux c’est. Pour les LSA, il s’agit du coût par lead facturé ; HOMEOMED est en CHF. Cliquez sur une barre pour voir le cas.',
     'Oct 1, 2025 – Sept 28, 2026': '1er octobre 2025 – 28 septembre 2026',
-    'Management of a Search campaign for a Swiss account billed in CHF, on a 23 CHF/day budget. Conversion-focused setup with a 5.38% conversion rate and a cost per conversion kept around 21 CHF.': 'Gestion d’une campagne Search pour un compte suisse facturé en CHF, avec un budget de 23 CHF/jour. Configuration orientée conversions, avec un taux de conversion de 5,38 % et un coût par conversion maintenu autour de 21 CHF.',
+    'Management of a Search campaign for a Swiss account billed in CHF, on a 23 CHF/day budget. Conversion-focused setup with a 5.37% conversion rate and a cost per conversion kept around 21 CHF.': 'Gestion d’une campagne Search pour un compte suisse facturé en CHF, avec un budget de 23 CHF/jour. Configuration orientée conversions, avec un taux de conversion de 5,37 % et un coût par conversion maintenu autour de 21 CHF.',
     'LSA · per lead': 'LSA · par lead',
     'All channels': 'Tous canaux',
     'billed leads': 'leads facturés',
