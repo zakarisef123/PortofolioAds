@@ -27,7 +27,7 @@
     --accent:#B8862F;
     --accent-deep:#2C3B6B;
     --accent-soft:#F2E9D8;
-    --btn-bg:#8F6420;--btn-ink:#FFFFFF;
+    --bar:#B8862F;--btn-bg:#8F6420;--btn-ink:#FFFFFF;
     --nav-bg:rgba(255,255,255,.92);
     --shadow:rgba(20,24,28,.08);
     color-scheme:light;
@@ -210,7 +210,12 @@
   }
   .browser-bar{display:flex;gap:5px;padding:8px 10px;border-bottom:1px solid var(--line);}
   .browser-bar span{width:7px;height:7px;border-radius:50%;background:var(--line);}
-  .browser img{width:100%;display:block;aspect-ratio:16/10;object-fit:cover;object-position:top;}
+  .screen{aspect-ratio:16/10;overflow:hidden;position:relative;}
+  .screen img{width:100%;height:auto;display:block;transform:translateY(0);transition:transform 1s ease;will-change:transform;}
+  @media (hover:hover) and (prefers-reduced-motion:no-preference){
+    .browser:hover .screen img{transform:translateY(var(--shift,0px));transition:transform var(--dur,4s) linear;}
+  }
+
   .phone{
     position:absolute;right:0;bottom:0;width:24%;
     border:3px solid #14181C;border-radius:12px;overflow:hidden;background:#14181C;
@@ -253,6 +258,40 @@
     .network{grid-template-columns:1fr;gap:18px;}
   }
 
+  /* CHART */
+  .chart{margin:32px 0 8px;padding:24px 24px 18px;border:1px solid var(--line);border-radius:10px;background:var(--bg);}
+  .chart-title{font-family:'Manrope',sans-serif;font-weight:800;font-size:17px;color:var(--ink);}
+  .chart-sub{font-size:12.5px;color:var(--muted);margin:4px 0 18px;}
+  .bars{display:flex;flex-direction:column;}
+  .bar-row{
+    position:relative;display:grid;grid-template-columns:200px 1fr;align-items:center;gap:14px;
+    padding:7px 6px;margin:0 -6px;border-radius:6px;text-decoration:none;color:inherit;
+  }
+  .bar-row:hover,.bar-row:focus-visible{background:var(--panel);}
+  .bar-label{display:flex;flex-direction:column;line-height:1.25;}
+  .bar-name{font-size:13px;font-weight:600;color:var(--ink);}
+  .bar-sub{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--muted);}
+  .bar-track{position:relative;display:flex;align-items:center;gap:8px;border-left:1px solid var(--line);min-height:24px;}
+  .bar{height:16px;background:var(--bar);border-radius:0 4px 4px 0;min-width:4px;}
+  .bar-val{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:var(--ink);white-space:nowrap;}
+  .bar-tip{
+    position:absolute;right:6px;top:50%;transform:translateY(-50%);pointer-events:none;
+    background:var(--ink);color:var(--bg);font-size:11.5px;line-height:1.4;padding:6px 9px;border-radius:6px;
+    opacity:0;transition:opacity .12s ease;white-space:nowrap;
+  }
+  .bar-row:hover .bar-tip,.bar-row:focus-visible .bar-tip{opacity:1;}
+
+  /* TOOLS */
+  .tools{padding:28px 0 32px;border-bottom:1px solid var(--line);}
+  .tools-label{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px;}
+  .tools-list{display:flex;flex-wrap:wrap;gap:8px;}
+  .tool{
+    display:inline-flex;align-items:center;gap:7px;padding:6px 11px;border:1px solid var(--line);border-radius:999px;
+    font-size:12.5px;font-weight:500;color:var(--ink);background:var(--bg);
+  }
+  .tool i{width:7px;height:7px;border-radius:50%;background:var(--accent);display:inline-block;}
+  .tool.web i{background:var(--accent-deep);}
+
   /* BUTTONS & CTA */
   .topnav-tools{display:flex;gap:6px;}
   .tool-btn{
@@ -287,24 +326,6 @@
   .filter.is-active{background:var(--ink);border-color:var(--ink);color:var(--bg);}
   .site-group[hidden]{display:none;}
 
-  /* OFFERS */
-  .offers{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px;}
-  .offer{
-    position:relative;border:1px solid var(--line);border-radius:8px;padding:24px 22px;background:var(--bg);
-    display:flex;flex-direction:column;
-  }
-  .offer-featured{border-color:var(--accent);box-shadow:0 10px 30px var(--shadow);}
-  .offer-badge{
-    position:absolute;top:-11px;left:22px;background:var(--accent);color:#fff;
-    font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;padding:3px 9px;border-radius:999px;
-  }
-  .offer h3{font-family:'Manrope',sans-serif;font-size:19px;font-weight:800;margin:0 0 8px;}
-  .offer p{font-size:13.5px;line-height:1.6;color:var(--muted);margin:0 0 14px;}
-  .offer ul{list-style:none;padding:0;margin:0 0 18px;font-size:13.5px;line-height:1.5;flex:1;}
-  .offer li{padding:6px 0 6px 22px;position:relative;border-top:1px solid var(--line);}
-  .offer li::before{content:"✓";position:absolute;left:2px;color:var(--accent);font-weight:700;}
-  .offer-price{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--accent-deep);font-weight:600;}
-
   /* CONTACT */
   .contact-block{
     margin:72px 0 0;padding:44px 36px;border-radius:12px;background:var(--panel);border:1px solid var(--line);
@@ -322,15 +343,15 @@
   .wa-float svg{width:28px;height:28px;}
 
   /* LIGHTBOX */
-  .shots img,.browser img{cursor:zoom-in;}
+  .shots img,.screen{cursor:zoom-in;}
   .lightbox{
     position:fixed;inset:0;z-index:50;background:rgba(10,12,15,.9);
-    display:flex;align-items:center;justify-content:center;padding:24px;cursor:zoom-out;
+    display:flex;padding:24px;cursor:zoom-out;overflow:auto;
   }
   .lightbox[hidden]{display:none;}
-  .lightbox img{max-width:100%;max-height:100%;border-radius:4px;box-shadow:0 20px 60px rgba(0,0,0,.5);}
+  .lightbox img{margin:auto;max-width:min(1100px,100%);height:auto;border-radius:4px;box-shadow:0 20px 60px rgba(0,0,0,.5);}
   .lightbox-close{
-    position:absolute;top:14px;right:18px;background:none;border:0;color:#fff;font-size:34px;line-height:1;cursor:pointer;
+    position:fixed;top:14px;right:18px;background:none;border:0;color:#fff;font-size:34px;line-height:1;cursor:pointer;
   }
 
   /* REVEAL */
@@ -343,7 +364,8 @@
   }
 
   @media(max-width:680px){
-    .offers{grid-template-columns:1fr;gap:22px;}
+    .bar-row{grid-template-columns:1fr;gap:4px;}
+    .bar-tip{display:none;}
     .contact-block{padding:32px 20px;}
     .topnav-links a[href="#ads"]{display:none;}
     .btn{flex:1 1 auto;justify-content:center;}
@@ -364,7 +386,6 @@
     <div class="topnav-links">
       <a href="#ads">Google Ads</a>
       <a href="#websites">Websites</a>
-      <a href="#offers">Offers</a>
       <a href="#contact">Contact</a>
     </div>
     <div class="topnav-tools">
@@ -381,12 +402,9 @@
     <h1>Zakari Sefta</h1>
     <p class="subtitle">Freelance digital acquisition: Google Ads, Local Services Ads &amp; Google My Business campaigns, plus the conversion-focused websites they point to. From bidding strategy and tracking to design, local SEO and continuous CPA and ROAS optimization.</p>
     <div class="cta-row">
-      <a class="btn btn-primary" href="https://wa.me/33651076271" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 12 12 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2l-.5-.3Z"/></svg><span>Discuss your project</span></a>
+      <a class="btn btn-primary" href="mailto:zakari.sefta@hotmail.com"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm18 2-10 7L2 6"/></svg><span>Contact me</span></a>
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/zakari-sefta" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.4 20.5h-3.6v-5.6c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9v5.7H9.3V9h3.4v1.6c.5-.9 1.6-1.8 3.4-1.8 3.6 0 4.3 2.4 4.3 5.5v6.2ZM5.3 7.4a2.1 2.1 0 1 1 0-4.2 2.1 2.1 0 0 1 0 4.2ZM7.1 20.5H3.5V9h3.6v11.5ZM22.2 0H1.8C.8 0 0 .8 0 1.7v20.6c0 .9.8 1.7 1.8 1.7h20.4c1 0 1.8-.8 1.8-1.7V1.7C24 .8 23.2 0 22.2 0Z"/></svg><span>LinkedIn</span></a>
       <a class="btn btn-ghost" href="tel:+33651076271"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2Z"/></svg><span>+33 6 51 07 62 71</span></a>
-    </div>
-    <div class="contact-row">
-      <a href="mailto:zakari.sefta@hotmail.com">zakari.sefta@hotmail.com</a>
-      <a href="https://www.linkedin.com/in/zakari-sefta" target="_blank" rel="noopener">linkedin.com/in/zakari-sefta</a>
     </div>
 
     <div class="summary">
@@ -435,14 +453,63 @@
     </div>
   </section>
 
+  <div class="tools">
+    <div class="tools-label">Tools I use daily</div>
+    <div class="tools-list"><span class="tool"><i></i>Google Ads</span><span class="tool"><i></i>Performance Max</span><span class="tool"><i></i>Local Services Ads</span><span class="tool"><i></i>Google Business Profile</span><span class="tool"><i></i>Google Tag Manager</span><span class="tool"><i></i>GA4</span><span class="tool web"><i></i>HTML / CSS / JS</span><span class="tool web"><i></i>React</span><span class="tool web"><i></i>Vite</span><span class="tool web"><i></i>Firebase</span><span class="tool web"><i></i>Stripe</span><span class="tool web"><i></i>Netlify</span></div>
+  </div>
+
   <div class="section-head" id="ads">
     <p class="eyebrow">Part 1</p>
     <h2>Google Ads &amp; Local Services Ads</h2>
     <p>Accounts I manage end to end. Figures are taken directly from the Google Ads and LSA dashboards shown below each case.</p>
   </div>
 
+  <figure class="chart" aria-labelledby="chart-title">
+    <figcaption>
+      <div class="chart-title" id="chart-title">Cost per conversion by account</div>
+      <div class="chart-sub">Lower is better. LSA figures are cost per billed lead. Click a bar to open the case.</div>
+    </figcaption>
+    <div class="bars">
+      <a class="bar-row" href="#case-batinov">
+        <span class="bar-label"><span class="bar-name">Bati Nov Rénovation</span><span class="bar-sub">LSA · per lead</span></span>
+        <span class="bar-track"><span class="bar" style="width:17.1%"></span><span class="bar-val">22,27€</span></span>
+        <span class="bar-tip"><span>Bati Nov Rénovation</span> · <span>LSA · per lead</span><br><strong>22,27€</strong> · 299 <span>billed leads</span></span>
+      </a>
+      <a class="bar-row" href="#case-gilles">
+        <span class="bar-label"><span class="bar-name">Ets Gilles</span><span class="bar-sub">Search &amp; PMax</span></span>
+        <span class="bar-track"><span class="bar" style="width:17.9%"></span><span class="bar-val">23,32€</span></span>
+        <span class="bar-tip"><span>Ets Gilles</span> · <span>Search &amp; PMax</span><br><strong>23,32€</strong> · 257 <span>conversions</span></span>
+      </a>
+      <a class="bar-row" href="#case-milenia">
+        <span class="bar-label"><span class="bar-name">Milenia Création</span><span class="bar-sub">Search</span></span>
+        <span class="bar-track"><span class="bar" style="width:18.8%"></span><span class="bar-val">24,48€</span></span>
+        <span class="bar-tip"><span>Milenia Création</span> · <span>Search</span><br><strong>24,48€</strong> · 46 <span>conversions</span></span>
+      </a>
+      <a class="bar-row" href="#case-gilles">
+        <span class="bar-label"><span class="bar-name">Ets Gilles</span><span class="bar-sub">LSA · per lead</span></span>
+        <span class="bar-track"><span class="bar" style="width:21.0%"></span><span class="bar-val">27,32€</span></span>
+        <span class="bar-tip"><span>Ets Gilles</span> · <span>LSA · per lead</span><br><strong>27,32€</strong> · 814 <span>billed leads</span></span>
+      </a>
+      <a class="bar-row" href="#case-michel">
+        <span class="bar-label"><span class="bar-name">Michel Elec</span><span class="bar-sub">Search &amp; PMax</span></span>
+        <span class="bar-track"><span class="bar" style="width:27.0%"></span><span class="bar-val">35,09€</span></span>
+        <span class="bar-tip"><span>Michel Elec</span> · <span>Search &amp; PMax</span><br><strong>35,09€</strong> · 18 <span>conversions</span></span>
+      </a>
+      <a class="bar-row" href="#case-sos">
+        <span class="bar-label"><span class="bar-name">SOS France Interventions</span><span class="bar-sub">Google Ads</span></span>
+        <span class="bar-track"><span class="bar" style="width:51.3%"></span><span class="bar-val">66,67€</span></span>
+        <span class="bar-tip"><span>SOS France Interventions</span> · <span>Google Ads</span><br><strong>66,67€</strong> · 840 <span>conversions</span></span>
+      </a>
+      <a class="bar-row" href="#case-interpro">
+        <span class="bar-label"><span class="bar-name">Inter Pro 24</span><span class="bar-sub">All channels</span></span>
+        <span class="bar-track"><span class="bar" style="width:97.8%"></span><span class="bar-val">127,08€</span></span>
+        <span class="bar-tip"><span>Inter Pro 24</span> · <span>All channels</span><br><strong>127,08€</strong> · 1023 <span>conversions</span></span>
+      </a>
+    </div>
+  </figure>
+
   <!-- SOS FRANCE INTERVENTIONS & SOS SERRURIER -->
-  <div class="case">
+  <div class="case" id="case-sos">
     <div class="case-head">
       <h2 class="case-title">SOS France Interventions &amp; SOS Serrurier</h2>
       <div class="case-period">March 23 – August 31, 2026</div>
@@ -499,7 +566,7 @@
   </div>
 
   <!-- INTER PRO 24 -->
-  <div class="case">
+  <div class="case" id="case-interpro">
     <div class="case-head">
       <h2 class="case-title">Inter Pro 24</h2>
       <div class="case-period">May 11 – August 31, 2026</div>
@@ -534,7 +601,7 @@
   </div>
 
   <!-- ETS GILLES -->
-  <div class="case">
+  <div class="case" id="case-gilles">
     <div class="case-head">
       <h2 class="case-title">Ets Gilles</h2>
       <div class="case-period">Feb 2 – August 31, 2026</div>
@@ -594,7 +661,7 @@
   </div>
 
   <!-- MICHEL ELEC -->
-  <div class="case">
+  <div class="case" id="case-michel">
     <div class="case-head">
       <h2 class="case-title">Michel Elec</h2>
       <div class="case-period">Aug 26 – Sept 26, 2026</div>
@@ -641,7 +708,7 @@
   </div>
 
   <!-- BATI NOV RÉNOVATION -->
-  <div class="case">
+  <div class="case" id="case-batinov">
     <div class="case-head">
       <h2 class="case-title">Bati Nov Rénovation</h2>
       <div class="case-period">Jan 1 – August 31, 2026</div>
@@ -675,7 +742,7 @@
   </div>
 
   <!-- MILENIA CREATION -->
-  <div class="case">
+  <div class="case" id="case-milenia">
     <div class="case-head">
       <h2 class="case-title">Milenia Création</h2>
       <div class="case-period">Jan 1 – Sept 2, 2026</div>
@@ -733,7 +800,7 @@
       <div class="site-visual">
         <div class="browser">
           <div class="browser-bar"><span></span><span></span><span></span></div>
-          <img src="assets/sites/7smash.jpg" alt="7Smash: desktop homepage" loading="lazy">
+          <div class="screen"><img src="assets/sites/7smash-full.jpg" alt="7Smash: desktop homepage" loading="lazy"></div>
         </div>
         <div class="phone"><img src="assets/sites/7smash-m.jpg" alt="7Smash: mobile homepage" loading="lazy"></div>
       </div>
@@ -749,7 +816,7 @@
       <div class="site-visual">
         <div class="browser">
           <div class="browser-bar"><span></span><span></span><span></span></div>
-          <img src="assets/sites/sosiji.jpg" alt="Sosiji — Korean Streetfood: desktop homepage" loading="lazy">
+          <div class="screen"><img src="assets/sites/sosiji-full.jpg" alt="Sosiji — Korean Streetfood: desktop homepage" loading="lazy"></div>
         </div>
         <div class="phone"><img src="assets/sites/sosiji-m.jpg" alt="Sosiji — Korean Streetfood: mobile homepage" loading="lazy"></div>
       </div>
@@ -765,7 +832,7 @@
       <div class="site-visual">
         <div class="browser">
           <div class="browser-bar"><span></span><span></span><span></span></div>
-          <img src="assets/sites/bollywood.jpg" alt="Bollywood Gaillard: desktop homepage" loading="lazy">
+          <div class="screen"><img src="assets/sites/bollywood-full.jpg" alt="Bollywood Gaillard: desktop homepage" loading="lazy"></div>
         </div>
         <div class="phone"><img src="assets/sites/bollywood-m.jpg" alt="Bollywood Gaillard: mobile homepage" loading="lazy"></div>
       </div>
@@ -781,7 +848,7 @@
       <div class="site-visual">
         <div class="browser">
           <div class="browser-bar"><span></span><span></span><span></span></div>
-          <img src="assets/sites/filgood.jpg" alt="Fil Good: desktop homepage" loading="lazy">
+          <div class="screen"><img src="assets/sites/filgood-full.jpg" alt="Fil Good: desktop homepage" loading="lazy"></div>
         </div>
         <div class="phone"><img src="assets/sites/filgood-m.jpg" alt="Fil Good: mobile homepage" loading="lazy"></div>
       </div>
@@ -804,7 +871,7 @@
       <div class="site-visual">
         <div class="browser">
           <div class="browser-bar"><span></span><span></span><span></span></div>
-          <img src="assets/sites/eclat-du-temps.jpg" alt="Éclat du Temps: desktop homepage" loading="lazy">
+          <div class="screen"><img src="assets/sites/eclat-du-temps-full.jpg" alt="Éclat du Temps: desktop homepage" loading="lazy"></div>
         </div>
         <div class="phone"><img src="assets/sites/eclat-du-temps-m.jpg" alt="Éclat du Temps: mobile homepage" loading="lazy"></div>
       </div>
@@ -820,7 +887,7 @@
       <div class="site-visual">
         <div class="browser">
           <div class="browser-bar"><span></span><span></span><span></span></div>
-          <img src="assets/sites/juliette-paccani.jpg" alt="Juliette Paccani — Lymphotherapist: desktop homepage" loading="lazy">
+          <div class="screen"><img src="assets/sites/juliette-paccani-full.jpg" alt="Juliette Paccani — Lymphotherapist: desktop homepage" loading="lazy"></div>
         </div>
         <div class="phone"><img src="assets/sites/juliette-paccani-m.jpg" alt="Juliette Paccani — Lymphotherapist: mobile homepage" loading="lazy"></div>
       </div>
@@ -836,7 +903,7 @@
       <div class="site-visual">
         <div class="browser">
           <div class="browser-bar"><span></span><span></span><span></span></div>
-          <img src="assets/sites/next-value-digital.jpg" alt="Next Value Digital: desktop homepage" loading="lazy">
+          <div class="screen"><img src="assets/sites/next-value-digital-full.jpg" alt="Next Value Digital: desktop homepage" loading="lazy"></div>
         </div>
         <div class="phone"><img src="assets/sites/next-value-digital-m.jpg" alt="Next Value Digital: mobile homepage" loading="lazy"></div>
       </div>
@@ -852,7 +919,7 @@
       <div class="site-visual">
         <div class="browser">
           <div class="browser-bar"><span></span><span></span><span></span></div>
-          <img src="assets/sites/mon-auto-42.jpg" alt="Mon Auto 42: desktop homepage" loading="lazy">
+          <div class="screen"><img src="assets/sites/mon-auto-42-full.jpg" alt="Mon Auto 42: desktop homepage" loading="lazy"></div>
         </div>
         <div class="phone"><img src="assets/sites/mon-auto-42-m.jpg" alt="Mon Auto 42: mobile homepage" loading="lazy"></div>
       </div>
@@ -868,7 +935,7 @@
       <div class="site-visual">
         <div class="browser">
           <div class="browser-bar"><span></span><span></span><span></span></div>
-          <img src="assets/sites/mistral-kart.jpg" alt="Mistral Kart: desktop homepage" loading="lazy">
+          <div class="screen"><img src="assets/sites/mistral-kart-full.jpg" alt="Mistral Kart: desktop homepage" loading="lazy"></div>
         </div>
         <div class="phone"><img src="assets/sites/mistral-kart-m.jpg" alt="Mistral Kart: mobile homepage" loading="lazy"></div>
       </div>
@@ -891,7 +958,7 @@
       <div class="site-visual">
         <div class="browser">
           <div class="browser-bar"><span></span><span></span><span></span></div>
-          <img src="assets/sites/nicoetfils.jpg" alt="Nico &amp; Fils: desktop homepage" loading="lazy">
+          <div class="screen"><img src="assets/sites/nicoetfils-full.jpg" alt="Nico &amp; Fils: desktop homepage" loading="lazy"></div>
         </div>
         <div class="phone"><img src="assets/sites/nicoetfils-m.jpg" alt="Nico &amp; Fils: mobile homepage" loading="lazy"></div>
       </div>
@@ -907,7 +974,7 @@
       <div class="site-visual">
         <div class="browser">
           <div class="browser-bar"><span></span><span></span><span></span></div>
-          <img src="assets/sites/nicoetfils-facade.jpg" alt="Nico et Fils — Façades: desktop homepage" loading="lazy">
+          <div class="screen"><img src="assets/sites/nicoetfils-facade-full.jpg" alt="Nico et Fils — Façades: desktop homepage" loading="lazy"></div>
         </div>
         <div class="phone"><img src="assets/sites/nicoetfils-facade-m.jpg" alt="Nico et Fils — Façades: mobile homepage" loading="lazy"></div>
       </div>
@@ -923,7 +990,7 @@
       <div class="site-visual">
         <div class="browser">
           <div class="browser-bar"><span></span><span></span><span></span></div>
-          <img src="assets/sites/michel-elec.jpg" alt="Michel Elec: desktop homepage" loading="lazy">
+          <div class="screen"><img src="assets/sites/michel-elec-full.jpg" alt="Michel Elec: desktop homepage" loading="lazy"></div>
         </div>
         <div class="phone"><img src="assets/sites/michel-elec-m.jpg" alt="Michel Elec: mobile homepage" loading="lazy"></div>
       </div>
@@ -945,7 +1012,7 @@
     <div class="site-visual">
       <div class="browser">
         <div class="browser-bar"><span></span><span></span><span></span></div>
-        <img src="assets/sites/lockr.jpg" alt="LOCKR: desktop login screen" loading="lazy">
+        <div class="screen"><img src="assets/sites/lockr-full.jpg" alt="LOCKR: desktop login screen" loading="lazy"></div>
       </div>
       <div class="phone"><img src="assets/sites/lockr-m.jpg" alt="LOCKR: mobile login screen" loading="lazy"></div>
     </div>
@@ -966,7 +1033,7 @@
     <div class="site-visual">
       <div class="browser">
         <div class="browser-bar"><span></span><span></span><span></span></div>
-        <img src="assets/sites/atlas-artisans.jpg" alt="Atlas Artisans: desktop homepage" loading="lazy">
+        <div class="screen"><img src="assets/sites/atlas-artisans-full.jpg" alt="Atlas Artisans: desktop homepage" loading="lazy"></div>
       </div>
       <div class="phone"><img src="assets/sites/atlas-artisans-m.jpg" alt="Atlas Artisans: mobile homepage" loading="lazy"></div>
     </div>
@@ -984,7 +1051,7 @@
     <div class="site-visual">
       <div class="browser">
         <div class="browser-bar"><span></span><span></span><span></span></div>
-        <img src="assets/sites/artisans-de-france.jpg" alt="Artisans de France: desktop homepage" loading="lazy">
+        <div class="screen"><img src="assets/sites/artisans-de-france-full.jpg" alt="Artisans de France: desktop homepage" loading="lazy"></div>
       </div>
       <div class="phone"><img src="assets/sites/artisans-de-france-m.jpg" alt="Artisans de France: mobile homepage" loading="lazy"></div>
     </div>
@@ -1002,7 +1069,7 @@
     <div class="site-visual">
       <div class="browser">
         <div class="browser-bar"><span></span><span></span><span></span></div>
-        <img src="assets/sites/swiss-hydro.jpg" alt="Swiss Hydro Services &amp; SOS Plomberie Genève: desktop homepage" loading="lazy">
+        <div class="screen"><img src="assets/sites/swiss-hydro-full.jpg" alt="Swiss Hydro Services &amp; SOS Plomberie Genève: desktop homepage" loading="lazy"></div>
       </div>
       <div class="phone"><img src="assets/sites/swiss-hydro-m.jpg" alt="Swiss Hydro Services &amp; SOS Plomberie Genève: mobile homepage" loading="lazy"></div>
     </div>
@@ -1018,43 +1085,15 @@
   </div>
   </div>
 
-  <div class="section-head" id="offers">
-    <p class="eyebrow">Part 3</p>
-    <h2>Offers</h2>
-    <p>Three ways to work together. Every project starts with a free call to look at your market, your competitors and your budget.</p>
-  </div>
-  <div class="offers">
-    <div class="offer">
-      <div class="service-num">01</div>
-      <h3>Website</h3>
-      <p>A custom website built to turn visitors into customers.</p>
-      <ul><li>Custom design, mobile-first</li><li>Click-to-call, quote or booking forms</li><li>Local SEO basics &amp; Google Business Profile</li><li>GTM / GA4 tracking installed</li><li>FR / EN version on request</li></ul>
-      <div class="offer-price">Custom quote</div>
-    </div>
-    <div class="offer offer-featured">
-      <div class="offer-badge">Most complete</div><div class="service-num">02</div>
-      <h3>Website + Ads</h3>
-      <p>The full package: the site and the campaigns that bring it traffic, managed together.</p>
-      <ul><li>Everything in Website</li><li>Google Ads &amp; Local Services Ads setup</li><li>Call and form conversion tracking</li><li>Monthly optimization &amp; reporting</li><li>One contact for the whole funnel</li></ul>
-      <div class="offer-price">Custom quote</div>
-    </div>
-    <div class="offer">
-      <div class="service-num">03</div>
-      <h3>Google Ads &amp; LSA</h3>
-      <p>Campaign management for businesses that already have a site.</p>
-      <ul><li>Account audit &amp; restructuring</li><li>Search, Performance Max &amp; LSA</li><li>Bidding strategy on CPA / ROAS</li><li>Weekly optimization</li><li>Clear monthly reporting</li></ul>
-      <div class="offer-price">Custom quote</div>
-    </div>
-  </div>
-
   <section class="contact-block" id="contact">
     <p class="eyebrow">Contact</p>
-    <h2>Let's talk about your project</h2>
-    <p>Tell me about your business and your goals. I usually reply within the day.</p>
+    <h2>Let's work together</h2>
+    <p>Open to new opportunities in paid acquisition and web. I usually reply within the day.</p>
     <div class="cta-row">
-      <a class="btn btn-primary" href="https://wa.me/33651076271" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 12 12 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2l-.5-.3Z"/></svg><span>WhatsApp</span></a>
+      <a class="btn btn-primary" href="mailto:zakari.sefta@hotmail.com"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm18 2-10 7L2 6"/></svg><span>Email</span></a>
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/zakari-sefta" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20.4 20.5h-3.6v-5.6c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9v5.7H9.3V9h3.4v1.6c.5-.9 1.6-1.8 3.4-1.8 3.6 0 4.3 2.4 4.3 5.5v6.2ZM5.3 7.4a2.1 2.1 0 1 1 0-4.2 2.1 2.1 0 0 1 0 4.2ZM7.1 20.5H3.5V9h3.6v11.5ZM22.2 0H1.8C.8 0 0 .8 0 1.7v20.6c0 .9.8 1.7 1.8 1.7h20.4c1 0 1.8-.8 1.8-1.7V1.7C24 .8 23.2 0 22.2 0Z"/></svg><span>LinkedIn</span></a>
+      <a class="btn btn-ghost" href="https://wa.me/33651076271" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 12 12 0 0 0 4.6 4c1.7.7 2.4.8 3.2.7.5-.1 1.5-.6 1.8-1.2.2-.6.2-1.1.1-1.2l-.5-.3Z"/></svg><span>WhatsApp</span></a>
       <a class="btn btn-ghost" href="tel:+33651076271"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2Z"/></svg><span>Call</span></a>
-      <a class="btn btn-ghost" href="mailto:zakari.sefta@hotmail.com"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm18 2-10 7L2 6"/></svg><span>Email</span></a>
     </div>
   </section>
 
