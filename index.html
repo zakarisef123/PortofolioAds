@@ -22,6 +22,7 @@
 
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
+  [id]{scroll-margin-top:72px;}
   body{
     margin:0;background:var(--bg);color:var(--ink);
     font-family:'Inter',sans-serif;
@@ -55,7 +56,7 @@
 
   /* SUMMARY STRIP */
   .summary{
-    display:grid;grid-template-columns:repeat(4,1fr);
+    display:grid;grid-template-columns:repeat(3,1fr);
     gap:1px;background:var(--line);
     margin-top:36px;border:1px solid var(--line);
   }
@@ -140,6 +141,92 @@
     .shots{grid-template-columns:1fr;}
   }
 
+  /* NAV */
+  .topnav{
+    position:sticky;top:0;z-index:10;
+    background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .topnav .wrap{display:flex;justify-content:space-between;align-items:center;height:56px;gap:16px;}
+  .topnav-name{font-family:'Manrope',sans-serif;font-weight:800;font-size:15px;color:var(--ink);text-decoration:none;}
+  .topnav-links{display:flex;gap:22px;font-family:'IBM Plex Mono',monospace;font-size:12px;}
+  .topnav-links a{color:var(--muted);text-decoration:none;}
+  .topnav-links a:hover{color:var(--ink);}
+
+  /* SERVICES */
+  .services{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:28px;
+    padding:48px 0;border-bottom:1px solid var(--line);
+  }
+  .service-num{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--accent);margin-bottom:10px;}
+  .service h3{font-family:'Manrope',sans-serif;font-size:17px;font-weight:700;margin:0 0 8px;}
+  .service p{font-size:13.5px;line-height:1.65;color:var(--muted);margin:0;}
+
+  /* SECTION HEADS */
+  .section-head{padding:72px 0 8px;}
+  .section-head h2{
+    font-family:'Manrope',sans-serif;font-size:clamp(26px,4vw,34px);font-weight:800;
+    margin:0 0 12px;letter-spacing:-0.01em;
+  }
+  .section-head p:not(.eyebrow){font-size:15px;line-height:1.7;color:var(--muted);max-width:640px;margin:0;}
+  .group-label{
+    font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;color:var(--accent);
+    text-transform:uppercase;letter-spacing:.08em;margin:48px 0 20px;
+    padding-bottom:10px;border-bottom:1px solid var(--line);
+  }
+
+  /* WEBSITES */
+  .sites{display:grid;grid-template-columns:repeat(2,1fr);gap:40px 28px;}
+  .site-visual{position:relative;padding:0 26px 26px 0;}
+  .browser{
+    border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--panel);
+    box-shadow:0 1px 2px rgba(20,24,28,.04),0 8px 24px rgba(20,24,28,.06);
+  }
+  .browser-bar{display:flex;gap:5px;padding:8px 10px;border-bottom:1px solid var(--line);}
+  .browser-bar span{width:7px;height:7px;border-radius:50%;background:var(--line);}
+  .browser img{width:100%;display:block;aspect-ratio:16/10;object-fit:cover;object-position:top;}
+  .phone{
+    position:absolute;right:0;bottom:0;width:24%;
+    border:3px solid var(--ink);border-radius:12px;overflow:hidden;background:var(--ink);
+    box-shadow:0 10px 24px rgba(20,24,28,.18);
+  }
+  .phone img{width:100%;display:block;aspect-ratio:390/760;object-fit:cover;object-position:top;}
+  .site-meta{margin-top:16px;}
+  .site-tag{
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--accent);
+    text-transform:uppercase;letter-spacing:.06em;
+  }
+  .site-title{font-family:'Manrope',sans-serif;font-size:19px;font-weight:700;margin:4px 0 6px;}
+  .site-desc{font-size:13.5px;line-height:1.65;color:var(--ink);margin:0 0 12px;}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;}
+  .chip{
+    font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--accent-deep);
+    background:var(--accent-soft);padding:3px 8px;border-radius:3px;
+  }
+  .site-link{
+    font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink);
+    text-decoration:none;border-bottom:1px solid var(--accent);
+  }
+  .site-link:hover{color:var(--accent);}
+
+  /* NETWORKS */
+  .network{
+    display:grid;grid-template-columns:1.1fr 1fr;gap:32px;align-items:start;
+    padding:32px 0;border-top:1px solid var(--line);
+  }
+  .group-label + .network{border-top:0;padding-top:0;}
+  .network-stats{display:flex;gap:28px;margin:14px 0 16px;}
+  .network-stats .metric-val{color:var(--accent-deep);}
+  .cities{font-size:13px;line-height:1.7;color:var(--muted);margin:0 0 12px;}
+
+  @media(max-width:680px){
+    .topnav-links{gap:14px;}
+    .topnav-name{display:none;}
+    .services{grid-template-columns:1fr;gap:24px;}
+    .sites{grid-template-columns:1fr;}
+    .network{grid-template-columns:1fr;gap:18px;}
+  }
+
   footer{
     padding:40px 0 60px;
     display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;
@@ -149,12 +236,23 @@
 </head>
 <body>
 
-<div class="wrap">
+<nav class="topnav">
+  <div class="wrap">
+    <a class="topnav-name" href="#top">Zakari Sefta</a>
+    <div class="topnav-links">
+      <a href="#ads">Google Ads</a>
+      <a href="#websites">Websites</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap" id="top">
 
   <header>
-    <p class="eyebrow">Ads Performance Portfolio</p>
+    <p class="eyebrow">Ads &amp; Web Portfolio</p>
     <h1>Zakari Sefta</h1>
-    <p class="subtitle">Management of Google Ads, Local Services Ads &amp; Google My Business campaigns — from bidding strategy to tracking, through to continuous CPA and ROAS optimization.</p>
+    <p class="subtitle">Freelance digital acquisition: Google Ads, Local Services Ads &amp; Google My Business campaigns, plus the conversion-focused websites they point to. From bidding strategy and tracking to design, local SEO and continuous CPA and ROAS optimization.</p>
     <div class="contact-row">
       <span>zakari.sefta@hotmail.com</span>
       <span>+33 6 51 07 62 71</span>
@@ -178,8 +276,40 @@
         <div class="summary-num">7</div>
         <div class="summary-label">Accounts managed autonomously</div>
       </div>
+      <div class="summary-item">
+        <div class="summary-num">150+</div>
+        <div class="summary-label">Websites designed &amp; shipped</div>
+      </div>
+      <div class="summary-item">
+        <div class="summary-num">60+</div>
+        <div class="summary-label">Local SEO city sites for trade networks</div>
+      </div>
     </div>
   </header>
+
+  <section class="services">
+    <div class="service">
+      <div class="service-num">01</div>
+      <h3>Paid acquisition</h3>
+      <p>Google Ads (Search, Performance Max), Local Services Ads and Google Business Profile. Account structure, bidding, budgets and weekly CPA / ROAS optimization.</p>
+    </div>
+    <div class="service">
+      <div class="service-num">02</div>
+      <h3>Websites that convert</h3>
+      <p>Custom, mobile-first sites for restaurants, therapists, local shops and tradespeople: click-to-call, quote forms, booking, online ordering, FR/EN versions.</p>
+    </div>
+    <div class="service">
+      <div class="service-num">03</div>
+      <h3>Tracking &amp; local SEO</h3>
+      <p>GTM / GA4 call and form tracking wired into every site, plus city-by-city landing pages built to rank locally and feed the ad campaigns.</p>
+    </div>
+  </section>
+
+  <div class="section-head" id="ads">
+    <p class="eyebrow">Part 1</p>
+    <h2>Google Ads &amp; Local Services Ads</h2>
+    <p>Accounts I manage end to end. Figures are taken directly from the Google Ads and LSA dashboards shown below each case.</p>
+  </div>
 
   <!-- SOS FRANCE INTERVENTIONS & SOS SERRURIER -->
   <div class="case">
@@ -439,9 +569,219 @@
     </div>
   </div>
 
-  <footer>
-    <span>Divonne-les-Bains, FR</span>
-    <span>July 2026</span>
+  <div class="section-head" id="websites">
+    <p class="eyebrow">Part 2</p>
+    <h2>Websites</h2>
+    <p>Sites I design, build and maintain for local businesses. Each one is custom-made, mobile-first and built around one goal: turning visitors into calls, bookings, orders or quote requests.</p>
+  </div>
+
+  <div class="group-label">Restaurants &amp; e-commerce</div>
+  <div class="sites">
+    <article class="site">
+      <div class="site-visual">
+        <div class="browser">
+          <div class="browser-bar"><span></span><span></span><span></span></div>
+          <img src="assets/sites/7smash.jpg" alt="7Smash: desktop homepage" loading="lazy">
+        </div>
+        <div class="phone"><img src="assets/sites/7smash-m.jpg" alt="7Smash: mobile homepage" loading="lazy"></div>
+      </div>
+      <div class="site-meta">
+        <div class="site-tag">Restaurant · Annemasse</div>
+        <h3 class="site-title">7Smash</h3>
+        <p class="site-desc">Smash burger restaurant near Geneva. Bold street-food identity, full menu, a "build your smash" configurator and online ordering.</p>
+        <div class="chips"><span class="chip">Online ordering</span><span class="chip">Burger builder</span><span class="chip">Opening hours live</span></div>
+      </div>
+    </article>
+    <article class="site">
+      <div class="site-visual">
+        <div class="browser">
+          <div class="browser-bar"><span></span><span></span><span></span></div>
+          <img src="assets/sites/sosiji.jpg" alt="Sosiji — Korean Streetfood: desktop homepage" loading="lazy">
+        </div>
+        <div class="phone"><img src="assets/sites/sosiji-m.jpg" alt="Sosiji — Korean Streetfood: mobile homepage" loading="lazy"></div>
+      </div>
+      <div class="site-meta">
+        <div class="site-tag">Restaurant · Thônex (GE)</div>
+        <h3 class="site-title">Sosiji — Korean Streetfood</h3>
+        <p class="site-desc">Korean street-food spot with a playful K-culture design: animated intro, bilingual menu and delivery links.</p>
+        <div class="chips"><span class="chip">FR / EN</span><span class="chip">Animated intro</span><span class="chip">Delivery links</span></div>
+        <a class="site-link" href="https://sosiji.netlify.app/" target="_blank" rel="noopener">sosiji.netlify.app ↗</a>
+      </div>
+    </article>
+    <article class="site">
+      <div class="site-visual">
+        <div class="browser">
+          <div class="browser-bar"><span></span><span></span><span></span></div>
+          <img src="assets/sites/bollywood.jpg" alt="Bollywood Gaillard: desktop homepage" loading="lazy">
+        </div>
+        <div class="phone"><img src="assets/sites/bollywood-m.jpg" alt="Bollywood Gaillard: mobile homepage" loading="lazy"></div>
+      </div>
+      <div class="site-meta">
+        <div class="site-tag">Restaurant · Gaillard (74)</div>
+        <h3 class="site-title">Bollywood Gaillard</h3>
+        <p class="site-desc">Indian &amp; Pakistani restaurant site with menu, table booking, takeaway ordering, photo gallery, loyalty programme and reviews.</p>
+        <div class="chips"><span class="chip">21 pages</span><span class="chip">FR / EN</span><span class="chip">Booking &amp; takeaway</span></div>
+        <a class="site-link" href="https://www.bollywoodgaillard.com/" target="_blank" rel="noopener">bollywoodgaillard.com ↗</a>
+      </div>
+    </article>
+    <article class="site">
+      <div class="site-visual">
+        <div class="browser">
+          <div class="browser-bar"><span></span><span></span><span></span></div>
+          <img src="assets/sites/filgood.jpg" alt="Fil Good: desktop homepage" loading="lazy">
+        </div>
+        <div class="phone"><img src="assets/sites/filgood-m.jpg" alt="Fil Good: mobile homepage" loading="lazy"></div>
+      </div>
+      <div class="site-meta">
+        <div class="site-tag">E-commerce · Handmade</div>
+        <h3 class="site-title">Fil Good</h3>
+        <p class="site-desc">Online shop for handmade, colourful accessories: product catalogue, category pages, cart and free-shipping threshold messaging.</p>
+        <div class="chips"><span class="chip">E-commerce</span><span class="chip">Product catalogue</span><span class="chip">Cart</span></div>
+      </div>
+    </article>
+  </div>
+
+  <div class="group-label">Wellness, services &amp; agency</div>
+  <div class="sites">
+    <article class="site">
+      <div class="site-visual">
+        <div class="browser">
+          <div class="browser-bar"><span></span><span></span><span></span></div>
+          <img src="assets/sites/eclat-du-temps.jpg" alt="Éclat du Temps: desktop homepage" loading="lazy">
+        </div>
+        <div class="phone"><img src="assets/sites/eclat-du-temps-m.jpg" alt="Éclat du Temps: mobile homepage" loading="lazy"></div>
+      </div>
+      <div class="site-meta">
+        <div class="site-tag">Wellness · Geneva</div>
+        <h3 class="site-title">Éclat du Temps</h3>
+        <p class="site-desc">Kobido massage and aesthetic acupuncture practice. Premium look, treatment pages, blog, discovery offer and online booking.</p>
+        <div class="chips"><span class="chip">26 pages</span><span class="chip">FR / EN</span><span class="chip">Booking</span><span class="chip">Blog</span></div>
+        <a class="site-link" href="https://eclatdutemps.com/" target="_blank" rel="noopener">eclatdutemps.com ↗</a>
+      </div>
+    </article>
+    <article class="site">
+      <div class="site-visual">
+        <div class="browser">
+          <div class="browser-bar"><span></span><span></span><span></span></div>
+          <img src="assets/sites/juliette-paccani.jpg" alt="Juliette Paccani — Lymphotherapist: desktop homepage" loading="lazy">
+        </div>
+        <div class="phone"><img src="assets/sites/juliette-paccani-m.jpg" alt="Juliette Paccani — Lymphotherapist: mobile homepage" loading="lazy"></div>
+      </div>
+      <div class="site-meta">
+        <div class="site-tag">Health · Divonne-les-Bains</div>
+        <h3 class="site-title">Juliette Paccani — Lymphotherapist</h3>
+        <p class="site-desc">One-page site for a Dr Vodder-certified lymphotherapist: treatments, how a session works, reviews and appointment booking.</p>
+        <div class="chips"><span class="chip">One-page</span><span class="chip">Appointment CTA</span><span class="chip">Reviews</span></div>
+      </div>
+    </article>
+    <article class="site">
+      <div class="site-visual">
+        <div class="browser">
+          <div class="browser-bar"><span></span><span></span><span></span></div>
+          <img src="assets/sites/next-value-digital.jpg" alt="Next Value Digital: desktop homepage" loading="lazy">
+        </div>
+        <div class="phone"><img src="assets/sites/next-value-digital-m.jpg" alt="Next Value Digital: mobile homepage" loading="lazy"></div>
+      </div>
+      <div class="site-meta">
+        <div class="site-tag">Agency · Divonne &amp; Geneva</div>
+        <h3 class="site-title">Next Value Digital</h3>
+        <p class="site-desc">Digital marketing agency site: services, pricing, portfolio, blog and a free-audit funnel.</p>
+        <div class="chips"><span class="chip">43 pages</span><span class="chip">FR / EN</span><span class="chip">Blog</span><span class="chip">Lead funnel</span></div>
+        <a class="site-link" href="https://zakarisef123.github.io/Next-Value-Digital/" target="_blank" rel="noopener">Visit site ↗</a>
+      </div>
+    </article>
+    <article class="site">
+      <div class="site-visual">
+        <div class="browser">
+          <div class="browser-bar"><span></span><span></span><span></span></div>
+          <img src="assets/sites/mon-auto-42.jpg" alt="Mon Auto 42: desktop homepage" loading="lazy">
+        </div>
+        <div class="phone"><img src="assets/sites/mon-auto-42-m.jpg" alt="Mon Auto 42: mobile homepage" loading="lazy"></div>
+      </div>
+      <div class="site-meta">
+        <div class="site-tag">Automotive · Saint-Étienne</div>
+        <h3 class="site-title">Mon Auto 42</h3>
+        <p class="site-desc">Independent garage: servicing, bodywork, windscreens, used-car listings and quote requests, built as a React single-page app.</p>
+        <div class="chips"><span class="chip">React + Vite</span><span class="chip">Used-car listings</span><span class="chip">Quote form</span></div>
+        <a class="site-link" href="https://www.monauto42.fr/" target="_blank" rel="noopener">monauto42.fr ↗</a>
+      </div>
+    </article>
+    <article class="site">
+      <div class="site-visual">
+        <div class="browser">
+          <div class="browser-bar"><span></span><span></span><span></span></div>
+          <img src="assets/sites/mistral-kart.jpg" alt="Mistral Kart: desktop homepage" loading="lazy">
+        </div>
+        <div class="phone"><img src="assets/sites/mistral-kart-m.jpg" alt="Mistral Kart: mobile homepage" loading="lazy"></div>
+      </div>
+      <div class="site-meta">
+        <div class="site-tag">Leisure · Montélimar</div>
+        <h3 class="site-title">Mistral Kart</h3>
+        <p class="site-desc">Karting track with 4 circuits: prices, gallery, challenges, group &amp; corporate events, click-to-call booking.</p>
+        <div class="chips"><span class="chip">One-page</span><span class="chip">Click-to-call</span><span class="chip">Events</span></div>
+        <a class="site-link" href="https://www.mistralkart.com/" target="_blank" rel="noopener">mistralkart.com ↗</a>
+      </div>
+    </article>
+  </div>
+
+  <div class="group-label">Lead-generation networks for tradespeople</div>
+  <div class="network">
+    <div class="site-visual">
+      <div class="browser">
+        <div class="browser-bar"><span></span><span></span><span></span></div>
+        <img src="assets/sites/atlas-artisans.jpg" alt="Atlas Artisans: desktop homepage" loading="lazy">
+      </div>
+      <div class="phone"><img src="assets/sites/atlas-artisans-m.jpg" alt="Atlas Artisans: mobile homepage" loading="lazy"></div>
+    </div>
+    <div>
+      <div class="site-tag">Locksmith · Plumbing · Electrical · Drainage</div>
+      <h3 class="site-title">Atlas Artisans</h3>
+      <p class="site-desc">A network of emergency-repair sites, one per city and per trade, each built to rank locally and to turn a Google search into a phone call within seconds.</p>
+      <div class="network-stats"><div><div class="metric-val">40+</div><div class="metric-label">Sites</div></div><div><div class="metric-val">13</div><div class="metric-label">Cities</div></div><div><div class="metric-val">4</div><div class="metric-label">Trades</div></div></div>
+      <p class="cities">Paris &amp; Île-de-France, Hauts-de-Seine (92), Nantes, Rennes, Saint-Brieuc, Angers, Bordeaux, Toulouse, Pau, Mont-de-Marsan, Toulon, Annecy, Chambéry.</p>
+      <div class="chips"><span class="chip">Local SEO</span><span class="chip">Click-to-call</span><span class="chip">24/7 urgency UX</span></div>
+    </div>
+  </div>
+  <div class="network">
+    <div class="site-visual">
+      <div class="browser">
+        <div class="browser-bar"><span></span><span></span><span></span></div>
+        <img src="assets/sites/artisans-de-france.jpg" alt="Artisans de France: desktop homepage" loading="lazy">
+      </div>
+      <div class="phone"><img src="assets/sites/artisans-de-france-m.jpg" alt="Artisans de France: mobile homepage" loading="lazy"></div>
+    </div>
+    <div>
+      <div class="site-tag">Locksmith · Plumbing</div>
+      <h3 class="site-title">Artisans de France</h3>
+      <p class="site-desc">Emergency locksmith and plumbing sites for the Artisans France network, which I also run Google Ads and LSA for (see Part 1). Each city site targets its own local search area.</p>
+      <div class="network-stats"><div><div class="metric-val">20+</div><div class="metric-label">Sites</div></div><div><div class="metric-val">10</div><div class="metric-label">Cities</div></div><div><div class="metric-val">2</div><div class="metric-label">Trades</div></div></div>
+      <p class="cities">Nîmes, Montpellier, Béziers, Toulouse, Bordeaux, Perpignan, Toulon, Nice, Cannes, Saint-Tropez.</p>
+      <div class="chips"><span class="chip">Local SEO</span><span class="chip">Cookie consent</span><span class="chip">GTM / GA4</span></div>
+        <a class="site-link" href="https://artisans-de-france-serrurier.fr/nimes/" target="_blank" rel="noopener">artisans-de-france-serrurier.fr ↗</a>
+    </div>
+  </div>
+  <div class="network">
+    <div class="site-visual">
+      <div class="browser">
+        <div class="browser-bar"><span></span><span></span><span></span></div>
+        <img src="assets/sites/swiss-hydro.jpg" alt="Swiss Hydro Services &amp; SOS Plomberie Genève: desktop homepage" loading="lazy">
+      </div>
+      <div class="phone"><img src="assets/sites/swiss-hydro-m.jpg" alt="Swiss Hydro Services &amp; SOS Plomberie Genève: mobile homepage" loading="lazy"></div>
+    </div>
+    <div>
+      <div class="site-tag">Plumbing · Switzerland</div>
+      <h3 class="site-title">Swiss Hydro Services &amp; SOS Plomberie Genève</h3>
+      <p class="site-desc">Emergency plumbing sites for the cantons of Geneva and Vaud, plus a separate SOS Plomberie Genève site: 24/7 call-first layout, service area and quote request.</p>
+      <div class="network-stats"><div><div class="metric-val">3</div><div class="metric-label">Sites</div></div><div><div class="metric-val">2</div><div class="metric-label">Cantons</div></div></div>
+      <p class="cities">Geneva, Lausanne and the canton of Vaud.</p>
+      <div class="chips"><span class="chip">Call-first UX</span><span class="chip">Quote form</span><span class="chip">Swiss market</span></div>
+        <a class="site-link" href="https://www.swiss-hydro-services.ch/" target="_blank" rel="noopener">swiss-hydro-services.ch ↗</a>
+    </div>
+  </div>
+
+  <footer id="contact">
+    <span>Divonne-les-Bains, FR · zakari.sefta@hotmail.com · +33 6 51 07 62 71</span>
+    <span>September 2026</span>
   </footer>
 
 </div>
